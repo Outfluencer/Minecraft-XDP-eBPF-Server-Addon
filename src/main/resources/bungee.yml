@@ -1,0 +1,4 @@
+name: xdp-bungeecord
+version: '1.0-SNAPSHOT'
+main: dev.outfluencer.xdpBungeecord.XdpBungeecord
+author: Outfluencer
