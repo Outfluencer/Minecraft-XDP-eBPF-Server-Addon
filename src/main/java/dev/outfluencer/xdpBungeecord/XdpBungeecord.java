@@ -3,6 +3,8 @@ package dev.outfluencer.xdpBungeecord;
 import dev.outfluencer.aya.mappings.Mappings;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.handler.timeout.ReadTimeoutException;
+import io.netty.handler.timeout.TimeoutException;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.protocol.channel.BungeeChannelInitializer;
@@ -40,7 +42,7 @@ public final class XdpBungeecord extends Plugin {
         @Override
         public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
             super.exceptionCaught(ctx, cause);
-            if (blocked) return;
+            if (blocked || cause instanceof TimeoutException) return;
             SocketAddress address = ctx.channel().remoteAddress();
             if (address instanceof InetSocketAddress) {
                 InetSocketAddress inets = (InetSocketAddress) address;
