@@ -44,11 +44,11 @@ public final class XdpBungeecord extends Plugin {
             super.exceptionCaught(ctx, cause);
             if (blocked || cause instanceof TimeoutException) return;
             SocketAddress address = ctx.channel().remoteAddress();
+            blocked = true;
             if (address instanceof InetSocketAddress) {
                 InetSocketAddress inets = (InetSocketAddress) address;
                 InetAddress inet = inets.getAddress();
                 if (inet instanceof Inet4Address) {
-                    blocked = true;
                     blockIp((Inet4Address) inet);
                 }
             }
